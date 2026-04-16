@@ -1,0 +1,47 @@
+---
+description: Analyze SaaS cohorts and unit economics — NDR/GRR triangles, LTV/CAC, payback, anomalies vs. seller narrative.
+argument-hint: "<deal_id> [path to transactions CSV]"
+---
+
+# Unit Economics Analysis
+
+Deterministic cohort and unit-economics analysis. Not LLM prose — actual computation that flags discrepancies between what the seller claims and what the data shows.
+
+## Usage
+
+```
+/unit-economics <deal_id> [transactions.csv]
+```
+
+## Arguments
+
+- `deal_id` (required) — the OloLand deal ID.
+- `transactions.csv` (optional) — customer-month revenue file with columns: `customer_id`, `period` (YYYY-MM-DD), `revenue`. If omitted, the tool will try to load transaction data extracted from the deal's financial documents.
+
+## Execution
+
+Load the `unit-economics` skill, then:
+
+1. **Pull stated narrative** — call `mcp__ololand__get_financial_snapshot` and `get_deal` to find the seller's claimed NDR/GRR/CAC payback/LTV-CAC. If the deal materials state these, capture them.
+2. **Load transactions** — read the CSV (or use deal-extracted transactions) and convert to the `[{customer_id, period, revenue}]` format.
+3. **Estimate inputs for LTV/CAC** if available from the deal:
+   - `sales_marketing_spend` (last 12 months)
+   - `new_customers_in_period`
+   - `gross_margin` (decimal, e.g. 0.75)
+   - `new_arr_in_period` (for magic number)
+   - `ebitda_margin`, `revenue_growth_yoy` (for rule of 40)
+4. **Run the analysis** — `mcp__ololand__analyze_unit_economics` with all inputs including any `stated_*` claims.
+5. **Surface anomalies** — anything in `result.anomalies` is a finding. High severity (>10pp NDR/GRR spread, >50% payback ratio deviation) belongs in the IC memo as a red flag.
+
+## Output
+
+Report:
+- Computed weighted NDR / GRR with cohort count
+- LTV / CAC / payback / LTV-CAC ratio
+- Magic number, rule of 40
+- Exponential decay half-life (logo retention curve fit) + R²
+- **Anomalies table** — metric, stated, computed, severity. If empty, state "narrative reconciles."
+
+Then suggest:
+- `/risk-report <deal_id>` if anomalies are high severity
+- `/valuation <deal_id>` to reflect cohort findings in the model

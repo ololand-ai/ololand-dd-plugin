@@ -8,7 +8,10 @@
     {
       "name": "ololand-dd",
       "source": "./ololand-dd",
-      "description": "Institutional due diligence control system — 33 MCP tools for deal analysis, financial valuation, risk assessment, and cross-deal learning."
+      "description": "Institutional underwriting layer inside Claude \u2014 39 MCP tools: deterministic DCF / LBO / Monte Carlo / real options engines, 246-category risk taxonomy, forensic QoE (Beneish, Benford, EBITDA bridge, lapping), cross-document reconciliation with source hierarchy, war-game RL simulation, and cross-deal learning against your firm's closed deals."
     }
-  ]
+  ],
+  "metadata": {
+    "description": "OloLand institutional due diligence plugin for Claude \u2014 the underwriting layer above Anthropic's native private-equity scaffold. Deterministic financial engines, 246-category risk taxonomy, forensic QoE, and cross-deal learning for PE / M&A professionals."
+  }
 }

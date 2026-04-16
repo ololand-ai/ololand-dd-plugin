@@ -2,11 +2,11 @@
   "mcpServers": {
     "ololand": {
       "type": "http",
-      "url": "${OLOLAND_MCP_URL:-https://ma-workbench-api-303576587005.us-central1.run.app/mcp}",
+      "url": "${OLOLAND_MCP_URL:-https://api.ololand.ai/mcp}",
       "headers": {
         "Authorization": "Bearer ${OLOLAND_AGENT_KEY}"
       },
-      "description": "OloLand M&A intelligence — 33 tools for deal analysis, financial valuation, risk assessment, document search, knowledge graph, competitive strategy simulation, corp dev workflows (build-vs-buy, acquisition thesis, batch triage), and report generation."
+      "description": "OloLand M&A intelligence — 39 tools for deal analysis, financial valuation (DCF/LBO/Monte Carlo), risk assessment, forensic QoE, document search, knowledge graph, market intelligence, cross-deal learning, voice (talk-to-deal), competitive strategy simulation (war game), corp dev workflows (build-vs-buy, acquisition thesis, batch triage), CRE underwriting (stress test, debt sizing), conversation sessions, workflow orchestration, and report generation."
     }
   }
 }
