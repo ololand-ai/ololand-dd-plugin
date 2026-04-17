@@ -40,13 +40,14 @@ Format constraints:
 Save as Gmail draft. Do NOT send.
 
 ### 6. Persistence
-Log each candidate to OloLand:
-- Company name + Apollo ID
-- Contact name + email
-- Hook used
-- Draft message ID (for tracking)
-- Sourced at timestamp
-- Source criteria (so you can later analyze what worked)
+Call `mcp__ololand__log_sourced_lead` for each candidate:
+- `email` + `name` + `company` from Apollo enrichment
+- `sourcing_hook` — the signal sentence used in the draft
+- `sourcing_criteria` — the user's original criteria (for "what worked" analysis)
+- `apollo_enrichment_data` — full Apollo payload (stored as JSON)
+
+LeadService auto-dedupes on email+source. If the lead already exists, it merges
+the new enrichment data. The next sourcing run will see this lead and skip it.
 
 This is the compounding step. Do not skip it.
 

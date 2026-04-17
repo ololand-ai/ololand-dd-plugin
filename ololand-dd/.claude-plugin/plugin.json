@@ -1,7 +1,7 @@
 {
   "name": "ololand-dd",
-  "version": "1.3.0",
-  "description": "Institutional underwriting layer inside Claude. 39 MCP tools: deterministic DCF / LBO / Monte Carlo / real options engines, 246-category risk taxonomy, forensic QoE (Beneish, Benford, EBITDA bridge, lapping), cross-document reconciliation with source hierarchy, war-game RL simulation, and cross-deal learning against your firm's closed deals.",
+  "version": "1.4.0",
+  "description": "Institutional underwriting layer inside Claude. 41 MCP tools: deterministic DCF / LBO / Monte Carlo / real options engines, 246-category risk taxonomy, forensic QoE (Beneish, Benford, EBITDA bridge, lapping), cross-document reconciliation with source hierarchy, war-game RL simulation, cross-deal learning, SaaS cohort analysis + unit economics, and deal sourcing pipeline.",
   "author": {
     "name": "OloLand",
     "email": "aleks@ololand.ai",

@@ -23,8 +23,14 @@ Load the `deal-sourcing` skill, then run this pipeline:
 2. **Dedupe against CRM** — for each candidate, check Salesforce (via Apollo or direct SF integration) for an existing account or open opportunity. Drop duplicates and surface "already in pipeline" matches separately.
 3. **Enrich** — `mcp__claude_ai_Apollo_io__apollo_organizations_enrich` for firmographics; `mcp__claude_ai_Apollo_io__apollo_contacts_search` to find founder/CEO/CFO contacts (one per company, prioritize founder > CEO > CFO).
 4. **Find a hook** — for each enriched company, look for a recent signal: funding round, hiring spike, leadership change, news mention. Pull from `mcp__ololand__deep_market_research` or `mcp__ololand__research_market` with company name + last 90 days.
-5. **Draft outreach** — for each (company, contact, hook) tuple, draft a 60-90 word email that opens with the specific signal, ties it to the fund's thesis, and proposes a 20-min intro call. Save as Gmail draft via `mcp__gmail__gmail_send_email` with `draft: true` (or the equivalent draft tool).
-6. **Persist** — log each candidate as a lead in the OloLand system: company, contact, hook, draft message ID, sourced_at timestamp. This is what compounds.
+5. **Draft outreach** — for each (company, contact, hook) tuple, draft a 60-90 word email that opens with the specific signal, ties it to the fund's thesis, and proposes a 20-min intro call. Save as Gmail draft via `mcp__claude_ai_Gmail__gmail_create_draft`.
+6. **Persist** — for each new lead, call `mcp__ololand__log_sourced_lead` with:
+   - `deal_id` (the sourcing project/pipeline deal ID)
+   - `email`, `name`, `company` from Apollo enrichment
+   - `sourcing_hook` (the signal you found)
+   - `sourcing_criteria` (the user's original search criteria)
+   - `apollo_enrichment_data` (full Apollo response for the company)
+   LeadService auto-dedupes on email+source. This is what compounds.
 
 ## Output
 
