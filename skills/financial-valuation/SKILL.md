@@ -1,5 +1,5 @@
 ---
-name: financial-valuation-methodology
+name: financial-valuation
 description: Use when performing financial valuations, building DCF/LBO models, running Monte Carlo simulations, or analyzing comparable transactions. Provides deterministic valuation framework with strict unit enforcement.
 ---
 

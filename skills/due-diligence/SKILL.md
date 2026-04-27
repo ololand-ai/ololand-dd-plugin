@@ -1,5 +1,5 @@
 ---
-name: due-diligence-methodology
+name: due-diligence
 description: Use when answering questions about M&A due diligence methodology, deal analysis frameworks, DD checklists, or when performing DD tasks. Provides institutional-grade DD framework with 246-category risk taxonomy.
 ---
 

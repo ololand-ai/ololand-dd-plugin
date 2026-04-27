@@ -9,7 +9,7 @@
   },
   "homepage": "https://ololand.ai",
   "repository": "https://github.com/ololand-ai/ololand-dd-plugin",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": [
     "finance",
     "private-equity",
