@@ -1,5 +1,5 @@
 ---
-name: risk-analysis-framework
+name: risk-analysis
 description: Use when analyzing risks for M&A deals, evaluating risk severity, quantifying financial impact of risks, or building risk matrices. Provides the 246-category institutional risk taxonomy with forensic QoE methodology.
 ---
 

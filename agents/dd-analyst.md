@@ -2,12 +2,6 @@
 name: dd-analyst
 description: Autonomous due diligence analyst agent. Runs comprehensive deal analysis using OloLand's MCP tools — financial extraction, risk assessment, valuation, forensic QoE, and cross-deal learning. Use for full DD workflows, IC memo preparation, or deep deal investigation.
 model: opus
-tools:
-  - Read
-  - Write
-  - Bash
-  - WebSearch
-  - WebFetch
 ---
 
 # DD Analyst Agent
