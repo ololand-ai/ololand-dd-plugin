@@ -64,20 +64,20 @@ Every deal compounds. Analyst corrections feed the retraining pipeline on Vertex
 
 **Gauntlet v4 T5 (institutional due diligence):** OloLand 90.5%, Claude alone 88.5%. Dual-judge scoring (Gemini 3.1 Pro + Claude Opus 4.6). Gap widens on forensic, reconciliation, and visual-decision tasks.
 
-## MCP Tools (39)
+## MCP Tools (44)
 
 | Category | Tools |
 |----------|-------|
 | **Deal Intelligence** | `list_deals`, `get_deal`, `get_deal_summary_tiles`, `get_deal_indicators` |
-| **Financial Valuation** | `get_financial_snapshot`, `get_dcf_valuation`, `run_monte_carlo_simulation` |
-| **Risk Analysis** | `get_deal_risks`, `get_evidence_links` |
-| **Documents** | `list_deal_documents`, `search_deal_documents` |
+| **Financial Valuation** | `get_financial_snapshot`, `get_dcf_valuation`, `run_monte_carlo_simulation`, `analyze_unit_economics` |
+| **Risk Analysis** | `get_deal_risks`, `get_evidence_links`, `analyze_forensic_qoe`, `render_risk_matrix_tile` |
+| **Documents** | `list_deal_documents`, `search_deal_documents`, `upload_deal_document` |
 | **Knowledge Graph** | `query_knowledge_graph`, `get_entity_neighbors`, `search_knowledge_graph` |
 | **Cross-Deal Learning** | `find_similar_deals` |
 | **Reports** | `generate_investment_memo`, `generate_cim`, `export_deal_dossier` |
 | **Market Intelligence** | `research_market`, `deep_market_research`, `search_pe_buyers`, `search_targets`, `search_ma_deals` |
 | **Strategy** | `run_war_game_simulation`, `analyze_build_vs_buy`, `generate_acquisition_thesis` |
-| **Corp Dev** | `batch_triage_companies` |
+| **Sourcing** | `batch_triage_companies`, `log_sourced_lead` |
 | **Voice** | `talk_to_deal` |
 | **CRE Underwriting** | `run_cre_stress_test`, `run_cre_debt_sizing`, `verify_sponsor_assumptions` |
 | **Conversation Sessions** | `create_conversation_session`, `list_conversation_sessions`, `get_conversation_session_summary` |

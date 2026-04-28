@@ -5,7 +5,7 @@ description: Show after first OloLand connection. Orients the user with availabl
 
 # Welcome to OloLand
 
-You're connected to OloLand's M&A intelligence engine — 39 tools for institutional-grade due diligence.
+You're connected to OloLand's M&A intelligence engine — 44 tools for institutional-grade due diligence.
 
 ## What You Can Do
 
