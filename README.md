@@ -107,6 +107,16 @@ First 100 tool calls free on install. Upgrade at [ololand.ai/pricing](https://ol
 
 OloLand assists with financial and investment workflows but does not provide financial or investing advice. Deterministic computation and reconciliation do not eliminate the need for professional judgment. All outputs — valuations, risk assessments, forensic findings, memos, and recommendations — should be reviewed by qualified financial professionals before being relied upon for investment decisions.
 
+## Contributing
+
+After cloning, install the git hooks once so commits are checked for manifest version drift:
+
+```bash
+./scripts/install-hooks.sh
+```
+
+The pre-commit hook runs `scripts/check-version-sync.sh`, which fails the commit if `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` disagree on the plugin version. When bumping the version, update both files in the same commit.
+
 ## License
 
 Apache-2.0. See [LICENSE](./LICENSE).
