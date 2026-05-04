@@ -2,7 +2,10 @@
   "mcpServers": {
     "ololand": {
       "type": "http",
-      "url": "https://ma-workbench-api-303576587005.us-central1.run.app/mcp"
+      "url": "https://ma-workbench-api-303576587005.us-central1.run.app/mcp",
+      "headers": {
+        "Authorization": "Bearer ${OLOLAND_AGENT_KEY}"
+      }
     }
   }
 }

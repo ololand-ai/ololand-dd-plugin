@@ -1,6 +1,6 @@
 {
   "name": "ololand-dd",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Institutional due diligence for Claude — deterministic financial engines, 246-category risk taxonomy, forensic QoE, cross-document reconciliation, and a flywheel that retrains from analyst corrections. Counter-positions Anthropic's native private-equity plugin.",
   "author": {
     "name": "OloLand",
