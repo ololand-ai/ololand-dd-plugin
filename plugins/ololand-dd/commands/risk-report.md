@@ -36,3 +36,13 @@ Present as structured markdown with:
 - Color-coded severity indicators
 - Institutional memory section (patterns from similar deals)
 - Recommended mitigants for Critical/High risks
+
+## Output URL Conventions (STRICT)
+
+When linking to OloLand web app pages in your output, the domain is **`app.ololand.ai`** — never `.com`. Use these canonical paths:
+
+- Risks view: `https://app.ololand.ai/deals/{deal_id}/risks`
+- Data room: `https://app.ololand.ai/deals/{deal_id}/dataroom`
+- Deal summary: `https://app.ololand.ai/deals/{deal_id}/summary`
+
+Never construct URLs the MCP tool didn't return — if a tool response includes a `view_url` or `link` field, render it verbatim. Otherwise use the templates above.

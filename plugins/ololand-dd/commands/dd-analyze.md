@@ -36,3 +36,15 @@ Report:
 - Financial snapshot (revenue, EBITDA, margins)
 - Any data reconciliation discrepancies
 - Suggested next steps: `/valuation` for financial modeling, `/risk-report` for deep risk analysis
+
+## Output URL Conventions (STRICT)
+
+When linking to OloLand web app pages in your output, use ONLY these canonical patterns. The domain is **`app.ololand.ai`** — never `.com`. Path segments are exact (e.g. `dataroom` not `data-room`; `due-diligence` with hyphen).
+
+- Risks view: `https://app.ololand.ai/deals/{deal_id}/risks`
+- Data room: `https://app.ololand.ai/deals/{deal_id}/dataroom`
+- Valuations: `https://app.ololand.ai/deals/{deal_id}/valuations`
+- Deal summary: `https://app.ololand.ai/deals/{deal_id}/summary`
+- Due diligence: `https://app.ololand.ai/deals/{deal_id}/due-diligence`
+
+If a tool response gives you a `view_url`, render that verbatim. Never construct a URL the tool didn't return when the tool gave you one.

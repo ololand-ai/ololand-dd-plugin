@@ -1,6 +1,6 @@
 {
   "name": "ololand-dd",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Institutional due diligence for Claude — deterministic DCF / LBO / Monte Carlo / Real Options engines, 246-category risk taxonomy with industry overlays, forensic QoE primitives (Beneish, Benford, EBITDA bridge, journal-entry testing, lapping detection), cross-document reconciliation with source hierarchy (CPA > tax > management > AI), MaskablePPO war-game competitive simulation, and a flywheel that retrains from analyst corrections. Three sub-agents: dd-analyst, forensic-screener (Pre-LOI 7-primitive forensic battery), war-game-strategist (16-quarter competitive simulation). Thirteen commands including /playbook-recall and /calibrate-vs-history for cross-deal memory. Counter-positions Anthropic's native private-equity plugin.",
   "author": {
     "name": "OloLand",
