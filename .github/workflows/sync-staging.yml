@@ -1,0 +1,66 @@
+name: Sync staging from main
+
+# Auto-rebase staging onto main after every PR merge to main.
+#
+# Why: this repo is rebase-merge-only at the GitHub level. After a PR
+# rebase-merges into main, origin/staging still has the pre-rebase SHAs
+# (content-identical to main but with different SHA pointers). Without a
+# sync, the divergence compounds across PRs and produces conflicts on
+# the next PR (verified incident: olo5 PR #1478 on 2026-05-06).
+#
+# This workflow runs the canonical post-rebase-merge sync automatically
+# so humans never have to think about it:
+#   git pull origin main --rebase
+#   git push --force-with-lease origin staging
+#
+# Failure modes:
+# - If staging has real new commits not on main → rebase replays them
+#   on top, push succeeds. (Common case during active development.)
+# - If staging has commits that conflict with main → rebase aborts,
+#   workflow fails, human handles it. (Rare — fail-loud is correct here.)
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-staging
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staging
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch main
+        run: git fetch origin main
+
+      - name: Rebase staging onto main
+        run: |
+          git rebase origin/main || {
+            echo "rebase failed — staging has commits that conflict with main"
+            git rebase --abort
+            exit 1
+          }
+
+      - name: Force-push staging
+        run: git push --force-with-lease origin staging
+
+      - name: Summary
+        run: |
+          echo "staging is now identical to main (rebased + force-pushed)" >> $GITHUB_STEP_SUMMARY
+          echo "commit: $(git rev-parse --short staging)" >> $GITHUB_STEP_SUMMARY
