@@ -23,13 +23,37 @@ The plugins compose additively with each other and with Anthropic's first-party 
 
 ## Prerequisites
 
-To get the most out of these plugins, you need an **OloLand account** with an `OLOLAND_AGENT_KEY`. The plugins call OloLand's MCP server (45 tools, OAuth 2.1 + agent keys) to compute DCF/LBO/Monte Carlo, run forensic engines, query the 246-category risk taxonomy, and pull cross-deal memory.
+The only thing you need is a free OloLand account. **No env var setup, no manual API key creation.** The plugins handle authentication via OAuth automatically when you install them.
 
-- **Sign up**: https://app.ololand.ai/signup (free tier with starter credits, then PAYG or subscription — see [pricing](https://ololand.ai/pricing))
-- **Get your agent key**: app.ololand.ai → Settings → Agent keys → Create new key
-- **Set the env var**: `export OLOLAND_AGENT_KEY=olo_agent_sk_...` (in your shell profile or `.env`)
+### Two account rails
 
-You can install and explore the plugins without the key, but every command that calls OloLand's backend will fail until the key is set.
+| Rail | Cost | Access |
+|---|---|---|
+| **Developer (free)** | Sign up at https://app.ololand.ai/signup | Sandbox-only — full MCP tool access against the included sample deal (`Paragon Flight School (Sample)`). Unlimited calls. No payment, no credit card. |
+| **Platform (paid)** | Pro $199/mo, Firm $800/seat/mo, or per-deal SKUs (see [pricing](https://ololand.ai/pricing)) | Access to your own deals + cross-deal memory + outcome flywheel + production volumes |
+
+You can install the plugins on a free Developer account and explore everything against the sample deal — DCF, LBO, Monte Carlo, forensic QoE, risk taxonomy, war-game, all of it. When you're ready to run on your own data, upgrade to a paid plan.
+
+### What happens on first install (no env var setup needed)
+
+1. Add the marketplace and install a plugin (steps in the Install sections below)
+2. The plugin defines an `ololand` MCP connector that points at OloLand's backend
+3. On first invocation, your Cowork / Claude Code prompts you to **Authorize** the connector via OAuth
+4. Click Authorize — your browser opens to OloLand's auth page, you sign in, accept the scopes
+5. OloLand's backend auto-provisions a scoped agent key, bound to your OAuth client. Cowork / Claude Code stores it for you
+6. Subsequent calls use the stored credential. No env var, no manual setup.
+
+That's it. The OAuth flow happens once and the connector is authenticated for that session and future ones.
+
+### Power user / headless setup (optional)
+
+If you're running the plugins in a headless environment (CI, server-side automation, custom MCP client that can't run OAuth), you can bypass OAuth with a manual agent key:
+
+1. Sign in at https://app.ololand.ai
+2. Settings → Agent keys → Create new key
+3. Set the env var: `export OLOLAND_AGENT_KEY=olo_agent_sk_...`
+
+The plugin's `.mcp.json` reads `${OLOLAND_AGENT_KEY}` as a Bearer header. If both OAuth and the env var are configured, OAuth takes precedence.
 
 ---
 
@@ -77,9 +101,11 @@ Click `Ololand dd` in the sidebar. The detail view should show:
 
 If Agents shows 1 instead of 3, you're on an older version. Remove the marketplace and re-add following Step 2.
 
-### Step 5 — Set up the OloLand connector
+### Step 5 — Authorize the OloLand connector
 
-The first time you invoke a command that calls OloLand's backend, Cowork will prompt you to authenticate the `ololand` MCP connector. Follow the OAuth flow OR set `OLOLAND_AGENT_KEY` in your environment.
+The first time you invoke a command that calls OloLand's backend (e.g., `/ololand-dd:dd-analyze`), Cowork prompts you to authorize the `ololand` MCP connector. Click **Authorize** → sign in to OloLand if you haven't yet → accept the scopes. The connector stores the credential for subsequent calls. **No env var setup needed.**
+
+If you're new to OloLand, signing in here also creates your free Developer account on the spot — you don't have to visit app.ololand.ai/signup separately.
 
 ---
 
@@ -117,15 +143,13 @@ In any Claude Code chat session:
 
 This opens the plugin manager TUI. Tab to the **Installed** tab and confirm all three OloLand plugins are listed and enabled. Open `ololand-dd` detail to verify version 1.5.2 and the three agents.
 
-### Step 5 — Set the agent key
+### Step 5 — Authorize the OloLand connector
 
-Add to your shell profile (`.zshrc`, `.bashrc`, etc.):
+The first time you invoke a command that calls OloLand's backend (e.g., `/ololand-dd:dd-analyze`), Claude Code triggers the OAuth flow for the `ololand` MCP connector. Your browser opens to OloLand's auth page → sign in → accept the scopes. Claude Code stores the credential. Subsequent calls authenticate automatically.
 
-```bash
-export OLOLAND_AGENT_KEY=olo_agent_sk_your_key_here
-```
+If you're new to OloLand, the auth page lets you sign up on the spot — no separate trip to app.ololand.ai/signup.
 
-Reload your shell or restart Claude Code.
+**For headless / CI use only**: set `OLOLAND_AGENT_KEY=olo_agent_sk_...` in your environment to bypass the OAuth flow. Get the key at app.ololand.ai → Settings → Agent keys → Create new key. OAuth takes precedence if both are configured.
 
 ---
 
@@ -311,16 +335,15 @@ Or if that fails:
 /plugin marketplace add ololand-ai/ololand-plugins
 ```
 
-### Tools fail with "OLOLAND_AGENT_KEY not set"
+### Tools fail with auth errors ("OLOLAND_AGENT_KEY not set", "401 Unauthorized", etc.)
 
-Set the env var:
-```bash
-export OLOLAND_AGENT_KEY=olo_agent_sk_...
-```
+Most common cause: you skipped or canceled the OAuth flow on first invocation.
 
-Reload your shell or restart Claude Desktop / Claude Code.
+**Fix in Cowork**: Customize → Connectors → click the `ololand` connector → click **Reconnect** (or **Disconnect** then click the connector again to retrigger OAuth). Sign in to OloLand and accept scopes.
 
-Get a key at https://app.ololand.ai/settings/agent-keys.
+**Fix in Claude Code CLI**: run any `/ololand-dd:` command — Claude Code retriggers the OAuth flow when it detects an unauthenticated connector. Sign in in the browser when prompted.
+
+**Headless / CI fallback**: if OAuth isn't possible (CI, scripts), generate an agent key at app.ololand.ai → Settings → Agent keys, then `export OLOLAND_AGENT_KEY=olo_agent_sk_...` in your environment.
 
 ### Plugin skills not appearing after install
 
