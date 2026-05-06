@@ -11,10 +11,10 @@
   "plugins": [
     {
       "name": "ololand-dd",
-      "version": "1.4.3",
+      "version": "1.5.0",
       "source": "ololand-dd",
       "category": "productivity",
-      "description": "Institutional due diligence for Claude — deterministic financial engines, 246-category risk taxonomy, forensic QoE, cross-document reconciliation, and a flywheel that retrains from analyst corrections. Counter-positions Anthropic's native private-equity plugin."
+      "description": "Institutional due diligence for Claude — deterministic financial engines, 246-category risk taxonomy, forensic QoE, cross-document reconciliation, war-game RL strategy simulation, and a flywheel that retrains from analyst corrections. Counter-positions Anthropic's native private-equity plugin. Adds forensic-screener + war-game-strategist sub-agents and playbook-recall + calibrate-vs-history commands in v1.5."
     },
     {
       "name": "ololand-compliance-hooks",
@@ -22,6 +22,13 @@
       "source": "ololand-compliance-hooks",
       "category": "compliance",
       "description": "Drop-in compliance, citation, and provenance hooks for Anthropic's Claude Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer, audit-log writeback. Populates the empty hooks/ scaffold Anthropic's finance verticals ship with."
+    },
+    {
+      "name": "ololand-forensic-qoe",
+      "version": "0.1.0",
+      "source": "ololand-forensic-qoe",
+      "category": "productivity",
+      "description": "Forensic Quality-of-Earnings primitives as a standalone plugin: Beneish M-Score, Benford's Law, EBITDA bridge, journal-entry testing, lapping detection, working-capital deep dive. The Pre-LOI Forensic Screen wedge — $7,500 / 72 hours, IC-defensible, vs Big-4 QoE at $150-500K / 4-8 weeks."
     }
   ]
 }

@@ -1,0 +1,54 @@
+---
+description: Apply your firm's historical projection accuracy to recalibrate the current deal's revenue, EBITDA, and risk projections. Surfaces systematic biases (e.g. "your firm consistently overestimates revenue growth by 15% in deals like this").
+---
+
+# Calibrate vs. History
+
+Uses cross-deal outcome data to adjust the current deal's headline projections by the historical bias your firm has shown in similar deals. The output is a calibrated projection: management's $X.XM EBITDA, with the historical-bias-corrected $Y.YM EBITDA shown alongside.
+
+## Usage
+
+```
+/calibrate-vs-history <deal_id>
+```
+
+## Arguments
+
+- `deal_id` (required) — The current deal to calibrate. Requires similar deals to have outcome data on file (i.e. closed and observed for at least 12 months post-close).
+
+## Execution
+
+1. Call `find_similar_deals` from the MCP server with the `deal_id`.
+2. Filter to similar deals with outcome data: deals that have entries in the outcome-tracking system showing realized vs. underwritten metrics.
+3. For each metric where outcome data exists (revenue growth, EBITDA margin, leverage trajectory, risk realization rates), compute:
+   - **Bias** — mean of (realized − underwritten) across similar deals
+   - **Variance** — standard deviation of the bias
+   - **Confidence** — sample size and recency
+4. Apply the bias to the current deal's projection. Return both the management projection and the calibrated projection side-by-side, with the bias explanation.
+
+## Output
+
+| Metric | Management | Historical bias | Calibrated | Confidence |
+|---|---|---|---|---|
+| FY27 revenue growth | 22% | -7pp avg (n=6, σ=4pp) | 15% | medium |
+| FY27 EBITDA margin | 24% | -2pp avg (n=6) | 22% | medium |
+| Customer concentration risk realizing | 8% | flagged 5/6, realized 3/6 | 50% | high |
+
+Plus a calibrated EBITDA dollar impact and an implied multiple correction.
+
+## Why this matters
+
+The hardest question to answer with general-purpose AI: "are *we* systematically too optimistic about deals like this?" That's a question only your firm's prior outcome data can answer. Calibrate-vs-history surfaces the bias and applies it to the live projection. It doesn't replace IC judgment — it gives IC the data to argue *with*.
+
+## Example
+
+```
+/calibrate-vs-history deal_acme_2026
+```
+
+Returns: "Your firm has overestimated revenue growth in similar industrial-services deals by an average of 7pp (n=6 deals 2022-2024, σ=4pp). Management projects 22% FY27 growth; calibrated projection is 15%. Implied EBITDA at exit drops from $42M to $34M, implied 5x exit multiple changes from $210M EV to $170M EV — bid should reflect this."
+
+## Related commands
+
+- `/similar-deals` — raw similarity output
+- `/playbook-recall` — what worked / didn't / was missed in similar past deals

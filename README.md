@@ -11,7 +11,8 @@ This repo is OloLand's plugin marketplace for **Claude Code** and **Claude Cowor
 
 | Plugin | Path | Status | What it ships |
 |---|---|---|---|
-| [`ololand-dd`](./plugins/ololand-dd) | `plugins/ololand-dd` | v1.4.3 | Institutional due diligence: deterministic financial engines, 246-category risk taxonomy, forensic QoE, cross-document reconciliation, and a flywheel that retrains from analyst corrections. |
+| [`ololand-dd`](./plugins/ololand-dd) | `plugins/ololand-dd` | v1.5.0 | Institutional due diligence: deterministic financial engines, 246-category risk taxonomy, cross-document reconciliation, war-game RL strategy simulation, and a flywheel that retrains from analyst corrections. |
+| [`ololand-forensic-qoe`](./plugins/ololand-forensic-qoe) | `plugins/ololand-forensic-qoe` | v0.1.0 | Forensic Quality-of-Earnings primitives as a standalone SKU: Beneish, Benford, EBITDA bridge, journal-entry testing, lapping detection, working-capital deep dive. The $7,500 Pre-LOI Forensic Screen wedge against Big-4 QoE. |
 | [`ololand-compliance-hooks`](./plugins/ololand-compliance-hooks) | `plugins/ololand-compliance-hooks` | v0.1.0 | Drop-in compliance, citation, and provenance hooks for Anthropic's Claude Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer, audit-log writeback. Populates the empty `hooks/` scaffold Anthropic's verticals ship with. |
 
 ## Install
@@ -21,6 +22,7 @@ Add this marketplace once, then install plugins individually:
 ```bash
 claude plugin marketplace add ololand-ai/ololand-plugins
 claude plugin install ololand-dd@ololand-plugins
+claude plugin install ololand-forensic-qoe@ololand-plugins
 claude plugin install ololand-compliance-hooks@ololand-plugins
 ```
 

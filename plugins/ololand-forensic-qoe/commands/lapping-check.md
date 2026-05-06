@@ -1,0 +1,44 @@
+---
+description: Detect AR-lapping fraud patterns — receivables-cycle anomalies indicating that customer payments are being applied to wrong invoices to hide bad debts or fictitious revenue.
+---
+
+# AR Lapping Detection
+
+Lapping is one of the oldest receivables-fraud schemes: customer A's payment is applied to customer B's overdue invoice; later, customer C's payment is applied to A; etc. The cycle hides bad debts and (in more aggressive variants) fictitious revenue. Detection requires looking at the *timing and pattern* of cash applications, not just totals.
+
+## Usage
+
+```
+/lapping-check <deal_id>
+```
+
+## Arguments
+
+- `deal_id` (required) — The deal to test. Requires AR aging schedule + cash receipts journal with customer-level detail and date stamps.
+
+## Execution
+
+1. Call `analyze_forensic_qoe` from the MCP server with `deal_id` and `primitives=["lapping"]`.
+2. The engine cross-references cash receipts to AR aging movements and looks for:
+   - **Application gaps** — payment received from customer A but applied to customer B's invoice
+   - **Aging cycles** — invoices that move from 60-day to 30-day aging after a non-payment cash receipt
+   - **Round-trip patterns** — a customer's invoice paid by another customer's payment, with the original customer paying a *third* party's overdue invoice within N days
+3. Returns suspect cycles with timing diagrams and the dollar amount in motion.
+
+## Output
+
+For each detected cycle:
+- The customers involved and the cash flow path
+- The "true" aged balance after correcting the misapplications
+- Estimate of bad-debt exposure that AR aging is currently hiding
+- Severity (suggestive / probable / strong evidence)
+
+## Why this matters
+
+Lapping is invisible to standard AR aging reviews because aging looks correct on the surface — the *application* is wrong, not the totals. Big-4 QoE catches lapping by tracing customer-to-cash. OloLand's lapping detector runs the same trace deterministically, in seconds, on the GL + AR aging exports already in the data room.
+
+## Example
+
+```
+/lapping-check deal_acme_2026
+```
