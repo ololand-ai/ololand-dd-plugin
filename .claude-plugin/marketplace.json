@@ -1,19 +1,27 @@
 {
-  "name": "ololand-dd-plugin",
+  "name": "ololand-plugins",
   "owner": {
     "name": "OloLand",
     "url": "https://ololand.ai"
+  },
+  "metadata": {
+    "description": "OloLand's plugin marketplace for Claude Code and Claude Cowork. Institutional buy-side underwriting depth on top of Anthropic's finance plugin lineup: deterministic financial engines, 246-category risk taxonomy, forensic QoE primitives, cross-deal learning, and the compliance hooks Anthropic's vertical plugins ship empty.",
+    "pluginRoot": "./plugins"
   },
   "plugins": [
     {
       "name": "ololand-dd",
       "version": "1.4.3",
-      "source": "./",
+      "source": "ololand-dd",
       "category": "productivity",
       "description": "Institutional due diligence for Claude — deterministic financial engines, 246-category risk taxonomy, forensic QoE, cross-document reconciliation, and a flywheel that retrains from analyst corrections. Counter-positions Anthropic's native private-equity plugin."
+    },
+    {
+      "name": "ololand-compliance-hooks",
+      "version": "0.1.0",
+      "source": "ololand-compliance-hooks",
+      "category": "compliance",
+      "description": "Drop-in compliance, citation, and provenance hooks for Anthropic's Claude Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer, audit-log writeback. Populates the empty hooks/ scaffold Anthropic's finance verticals ship with."
     }
-  ],
-  "metadata": {
-    "description": "OloLand institutional due diligence plugin for Claude — the underwriting layer above Anthropic's native private-equity scaffold. Deterministic financial engines, 246-category risk taxonomy, forensic QoE, and cross-deal learning for PE / M&A professionals."
-  }
+  ]
 }
