@@ -10,24 +10,24 @@
   "plugins": [
     {
       "name": "ololand-dd",
-      "version": "1.5.4",
+      "version": "1.6.0",
       "source": "./plugins/ololand-dd",
       "category": "productivity",
-      "description": "Institutional due diligence for Claude — deterministic DCF / LBO / Monte Carlo / Real Options engines, 246-category risk taxonomy with industry overlays, forensic QoE primitives (Beneish, Benford, EBITDA bridge, journal-entry testing, lapping detection), cross-document reconciliation with source hierarchy (CPA > tax > management > AI), MaskablePPO war-game competitive simulation, and a flywheel that retrains from analyst corrections. Three sub-agents: dd-analyst, forensic-screener (Pre-LOI 7-primitive forensic battery), war-game-strategist (16-quarter competitive simulation). Fourteen commands including /meeting-prep, /playbook-recall, and /calibrate-vs-history for cross-deal memory. Counter-positions Anthropic's native private-equity plugin."
+      "description": "Institutional due diligence for Claude — deterministic DCF / LBO / Monte Carlo / Real Options engines, 246-category risk taxonomy with industry overlays, forensic QoE primitives (Beneish, Benford, EBITDA bridge, journal-entry testing, lapping detection), cross-document reconciliation with source hierarchy (CPA > tax > management > AI), MaskablePPO war-game competitive simulation, middle-office assumption controls that gate IC approval, and a flywheel that retrains from analyst corrections. Three sub-agents: dd-analyst, forensic-screener (Pre-LOI 7-primitive forensic battery), war-game-strategist (16-quarter competitive simulation). Sixteen commands including /assumption-controls, /ic-approve-readiness, /playbook-recall, and /calibrate-vs-history. Counter-positions Anthropic's native private-equity plugin."
     },
     {
       "name": "ololand-compliance-hooks",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "./plugins/ololand-compliance-hooks",
       "category": "compliance",
-      "description": "Drop-in compliance, citation, and provenance hooks for Anthropic's Claude Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer, audit-log writeback. Populates the empty hooks/ scaffold Anthropic's finance verticals ship with."
+      "description": "Drop-in compliance, citation, and provenance hooks for Anthropic's Claude Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer, audit-log writeback, tier-capacity warning, and evidence-quality warning for OloLand's IC approval gate. Populates the empty hooks/ scaffold Anthropic's finance verticals ship with."
     },
     {
       "name": "ololand-forensic-qoe",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "./plugins/ololand-forensic-qoe",
       "category": "productivity",
-      "description": "Forensic Quality-of-Earnings primitives as a standalone plugin: Beneish M-Score, Benford's Law, EBITDA bridge, journal-entry testing, lapping detection, working-capital deep dive. The Pre-LOI Forensic Screen wedge — $7,500 / 72 hours, IC-defensible, vs Big-4 QoE at $150-500K / 4-8 weeks."
+      "description": "Forensic Quality-of-Earnings primitives as a standalone plugin: Beneish M-Score, Benford's Law, EBITDA bridge, journal-entry testing, lapping detection, working-capital deep dive, and covenant-cascade analysis (cross-default chain modeling). The Pre-LOI Forensic Screen wedge — $7,500 / 72 hours, IC-defensible, vs Big-4 QoE at $150-500K / 4-8 weeks."
     }
   ]
 }

@@ -19,14 +19,15 @@ Find similar completed deals and extract institutional learning patterns.
 ## Execution
 
 1. Call `find_similar_deals` from the MCP server.
-2. For each similar deal, present:
+2. **If the response is `status: "no_usable_corpus"`** — stop here. Tell the user that strict similarity filters (deal type, sector family, size ratio) could not form a usable cohort. Do NOT relax filters or invent a cohort.
+3. For each similar deal in a usable cohort, present:
    - **Deal profile**: Industry, size, type, outcome
    - **Similarity score**: Breakdown by industry (35%), size (25%), type (20%), margin (20%)
    - **Learning insights**:
      - Accuracy patterns: "Revenue projections were overestimated by 15% in 4/6 similar deals"
      - Common risks: "Customer concentration was flagged in 5/6 deals and materialized in 3"
      - Valuation ranges: "Median EV/EBITDA was 8.2x for similar deals"
-3. Synthesize actionable recommendations:
+4. Synthesize actionable recommendations:
    - Which risk categories to watch most carefully
    - Where historical predictions were systematically biased
    - How to calibrate financial assumptions based on past outcomes

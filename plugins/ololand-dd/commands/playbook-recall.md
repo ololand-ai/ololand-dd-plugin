@@ -1,5 +1,5 @@
 ---
-description: Pull your firm's playbook for deals like this — what worked, what didn't, what got missed in similar past deals. Wraps cross-deal learning + knowledge-graph lookup.
+description: Pull your firm's playbook for deals like this — what worked, what didn't, what got missed in similar past deals. Wraps cross-deal learning + per-deal outcome metadata.
 ---
 
 # Playbook Recall
@@ -19,11 +19,13 @@ Surfaces your firm's institutional memory on deals like this one. For each simil
 ## Execution
 
 1. Call `find_similar_deals` from the MCP server with the `deal_id`. Returns up to 8 most similar past deals.
-2. For each similar deal, call `query_knowledge_graph` to pull:
-   - The risk flags raised during DD
-   - The playbook moves attempted (price negotiation tactics, due-diligence pivots, IC objections)
-   - The post-close outcomes (did the deal hit underwriting? what risks materialized?)
-3. Synthesize into a structured playbook recall:
+2. **If the response is `status: "no_usable_corpus"`** — stop here. Tell the user explicitly that institutional memory cannot support this deal yet (strict deal-type / sector-family / size-ratio filters couldn't form a usable cohort). Do NOT fabricate a cohort from looser matching.
+3. For each similar deal in a usable cohort, walk the `outcome` / `learning_insights` blocks that `find_similar_deals` returns directly:
+   - The risk categories that were flagged during DD vs. the risks that materialized post-close
+   - The accuracy patterns (where projections were systematically optimistic / pessimistic)
+   - The valuation ranges that closed vs. the underwritten range
+4. For deeper context on specific past deals, use `get_deal`, `get_deal_risks`, and `get_evidence_links` on the historical deal IDs returned in step 1.
+5. Synthesize into a structured playbook recall:
 
    - **What worked** — moves that recurred across multiple similar deals with positive outcomes
    - **What didn't** — moves attempted but with poor outcomes; treat as anti-patterns

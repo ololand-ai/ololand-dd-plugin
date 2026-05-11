@@ -56,6 +56,21 @@
             "type": "command",
             "command": "${CLAUDE_PLUGIN_ROOT}/scripts/audit_log.sh post",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/tier_capacity_warning.sh",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__ololand__get_assumption_evidence_pack|mcp__ololand__get_assumption_control_summary|mcp__ololand__set_assumption_status|mcp__ololand__generate_investment_memo|mcp__ololand__export_deal_dossier",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/evidence_quality_warning.sh",
+            "timeout": 10
           }
         ]
       },

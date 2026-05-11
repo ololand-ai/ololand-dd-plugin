@@ -19,12 +19,13 @@ Uses cross-deal outcome data to adjust the current deal's headline projections b
 ## Execution
 
 1. Call `find_similar_deals` from the MCP server with the `deal_id`.
-2. Filter to similar deals with outcome data: deals that have entries in the outcome-tracking system showing realized vs. underwritten metrics.
-3. For each metric where outcome data exists (revenue growth, EBITDA margin, leverage trajectory, risk realization rates), compute:
+2. **If the response is `status: "no_usable_corpus"`** — stop here. Tell the user the firm does not yet have a usable cohort of closed-and-observed similar deals to calibrate against. Do NOT calibrate against a forced cohort.
+3. Filter to similar deals with outcome data: deals that have entries in the outcome-tracking system showing realized vs. underwritten metrics.
+4. For each metric where outcome data exists (revenue growth, EBITDA margin, leverage trajectory, risk realization rates), compute:
    - **Bias** — mean of (realized − underwritten) across similar deals
    - **Variance** — standard deviation of the bias
    - **Confidence** — sample size and recency
-4. Apply the bias to the current deal's projection. Return both the management projection and the calibrated projection side-by-side, with the bias explanation.
+5. Apply the bias to the current deal's projection. Return both the management projection and the calibrated projection side-by-side, with the bias explanation.
 
 ## Output
 
