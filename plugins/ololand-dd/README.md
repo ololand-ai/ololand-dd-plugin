@@ -24,7 +24,9 @@ That's it. The plugin authenticates on first invocation, seeds a sample deal if 
 
 | Command | What it does |
 |---------|--------------|
+| `/pre-screen` | Pre-NDA public-company screen — creates the deal, ingests filings only (no web, no news, no merger filings), extracts risks, runs Monte Carlo, outputs a 1-page brief with Pass / Pursue-to-NDA / More-Data recommendation |
 | `/dd-analyze` | Full due diligence pipeline — extract → reconcile → risk → DCF / LBO / MC / real options → forensic QoE → investment memo |
+| `/ic-memo-skeptical` | Stage-2 IC memo composed via skeptical tile-stitching with public-facts freshness gate, citation audit, and explicit gap-vs-finding framing — preferred memo entry point as of 2026-05-12 |
 | `/risk-report` | 246-category risk matrix with evidence links, dollar quantification, and industry overlays |
 | `/valuation` | Deterministic DCF, multi-tranche LBO, 10,000-path Monte Carlo, comparable transactions, real options |
 | `/unit-economics` | Cohort analysis, CAC payback, NDR, LTV:CAC, magic number — for SaaS and services targets |

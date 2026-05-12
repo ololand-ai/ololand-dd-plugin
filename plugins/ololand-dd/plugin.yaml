@@ -1,5 +1,5 @@
 name: ololand-dd
-version: 1.6.1
+version: 1.7.0
 displayName: OloLand DD
 category: Productivity
 description: >-
@@ -11,8 +11,10 @@ description: >-
   competitive simulation, middle-office assumption controls that gate IC
   approval, and a flywheel that retrains from analyst corrections. Three
   sub-agents: dd-analyst, forensic-screener (Pre-LOI 7-primitive forensic
-  battery), war-game-strategist (16-quarter competitive simulation). Sixteen
-  commands including /assumption-controls, /ic-approve-readiness,
+  battery), war-game-strategist (16-quarter competitive simulation). Eighteen
+  commands including /pre-screen (stage-1 pre-NDA public-target screen with web
+  search explicitly off), /ic-memo-skeptical (stage-2 defensive memo with
+  citation audit), /assumption-controls, /ic-approve-readiness,
   /playbook-recall, and /calibrate-vs-history. Counter-positions Anthropic's
   native private-equity plugin.
 shortDescription: Institutional due diligence for M&A and private equity.

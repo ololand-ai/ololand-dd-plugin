@@ -28,16 +28,21 @@ Runs the full forensic-QoE battery on a deal and produces an IC-defensible exclu
    - **Working-capital deep dive** — DSO/DPO/DIO trend + quality scoring
    - **Revenue quality deep dive** — concentration, hockey-stick, cut-off testing
 3. Each finding includes severity (low/medium/high/critical), dollar impact estimate, and a citation back to the source document and page.
-4. Output is the structured exclusion schedule — what gets excluded from headline EBITDA, what gets flagged for management Q&A, what kills the bid.
+4. **Classify each primitive output as `gap` vs `finding` before composing the analyst-facing summary.** This is the single most important narrative step — and the one the Project Atlas Claude memo got wrong by presenting `Not computed` Beneish/Benford results as if the engine had concluded "no anomalies." Use this taxonomy verbatim:
+    - **`finding`** — the primitive ran end-to-end on adequate input data and returned a quantitative result (M-Score = -1.42, Benford χ² = 47.3, lapping rate = 3.2%). The result is IC-evidence: pass/warning/fail, cited, can be argued.
+    - **`gap`** — the primitive returned a status in `{insufficient_data, insufficient_sample, not_reliable, unavailable, not_computed}`. This is NOT a clean bill of health and MUST NOT be presented as one. It is a **diligence ask** — name the missing data class (e.g. "GL extract ≥30 line items", "two comparable annual periods", "AR sub-ledger with customer aging") and surface it as a gating condition.
+   The narrator MUST label each primitive at the top of its section with `[finding]` or `[gap]`. Memos that pattern-match `Result: Not computed → Implication: cannot rely on M-Score` are correct (gap framing); memos that pattern-match `Beneish M-Score: -2.0 (low likelihood)` when status was insufficient_data are wrong (false-clean framing).
+5. Output is the structured exclusion schedule — what gets excluded from headline EBITDA, what gets flagged for management Q&A, what kills the bid. Gaps (from step 4) appear in the Open Questions section, NOT the exclusion schedule.
 
 ## Output structure
 
 For each primitive:
-- **Result** — pass / warning / fail
-- **Numeric finding** — e.g. M-Score = -1.42 (low manipulation likelihood) or Benford χ² = 47.3 (significant deviation, p<0.001)
-- **Adjustments** — line-by-line additions/subtractions to reported EBITDA with $ amounts
-- **Evidence** — citations to source pages
-- **Recommendation** — proceed / proceed with caveats / kill
+- **Classification** — `[finding]` (engine ran, result computed) or `[gap]` (engine returned insufficient_data / not_reliable / unavailable)
+- **Result** — pass / warning / fail (for findings) OR data-pull ask (for gaps)
+- **Numeric finding** — e.g. M-Score = -1.42 (low manipulation likelihood) or Benford χ² = 47.3 (significant deviation, p<0.001). Gaps have no numeric finding; state the missing input class instead.
+- **Adjustments** — line-by-line additions/subtractions to reported EBITDA with $ amounts. Gaps contribute zero adjustments; they contribute open questions.
+- **Evidence** — citations to source pages (findings) OR a list of the document classes that would unblock the primitive (gaps)
+- **Recommendation** — proceed / proceed with caveats / kill (findings) OR request-data-then-rerun (gaps)
 
 ## Why this matters
 

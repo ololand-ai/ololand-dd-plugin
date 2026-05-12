@@ -18,7 +18,10 @@ Optional shells: Anthropic's `private-equity`, `investment-banking`, `financial-
 
 ### Phase 0 — Setup (one-time)
 
-- Install plugins from `ololand-ai/ololand-plugins` marketplace
+- Install plugins from `ololand-ai/ololand-plugins` marketplace. Three surfaces, same three plugins:
+  - **Claude Cowork** (Desktop UI) — Customize → Plugins → Add marketplace → paste `ololand-ai/ololand-plugins` → install all three
+  - **Claude Code** (CLI) — `claude plugin marketplace add ololand-ai/ololand-plugins` then `claude plugin install ololand-dd ololand-forensic-qoe ololand-compliance-hooks`
+  - **Codex CLI** — see [`codex-install.md`](./codex-install.md) for the full sequence (env var + marketplace add + `~/.codex/config.toml` enable + `codex mcp add`)
 - Connect data sources via Cowork's MCP catalog (per-phase recommendations below)
 
 ### Phase 1 — Target intake + market context
