@@ -7,4 +7,6 @@ repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 git -C "$repo_root" config core.hooksPath scripts/git-hooks
 echo "core.hooksPath -> scripts/git-hooks"
 echo "verifying guard runs:"
-"$repo_root/scripts/check-version-sync.sh" && echo "  ok: plugin.json and marketplace.json versions match"
+"$repo_root/scripts/check-plugin-artifacts.sh"
+"$repo_root/scripts/check-version-sync.sh"
+echo "  ok: generated artifacts and marketplace versions are in sync"

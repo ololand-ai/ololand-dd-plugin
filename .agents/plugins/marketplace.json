@@ -1,0 +1,44 @@
+{
+  "name": "ololand-plugins",
+  "interface": {
+    "displayName": "OloLand Plugins"
+  },
+  "plugins": [
+    {
+      "name": "ololand-dd",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ololand-dd"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "ololand-compliance-hooks",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ololand-compliance-hooks"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Compliance"
+    },
+    {
+      "name": "ololand-forensic-qoe",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ololand-forensic-qoe"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -13,11 +13,27 @@ This repo is OloLand's plugin marketplace for **Claude Cowork** (Claude Desktop)
 
 | Plugin | Status | What it does |
 |---|---|---|
-| [`ololand-dd`](./plugins/ololand-dd) | v1.5.2 | Institutional due diligence: deterministic financial engines, 246-category risk taxonomy, cross-document reconciliation, war-game RL strategy simulation, and a flywheel that retrains from analyst corrections. |
-| [`ololand-forensic-qoe`](./plugins/ololand-forensic-qoe) | v0.1.0 | Forensic Quality-of-Earnings primitives as a standalone wedge SKU: Beneish, Benford, EBITDA bridge, journal-entry testing, lapping detection, working-capital deep dive. The Pre-LOI Forensic Screen — $7,500 / 72 hours, IC-defensible, vs Big-4 QoE at $150-500K / 4-8 weeks. |
-| [`ololand-compliance-hooks`](./plugins/ololand-compliance-hooks) | v0.1.0 | Drop-in compliance, citation, and provenance hooks for Anthropic's Claude Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer, audit-log writeback. Populates the empty `hooks/` scaffold Anthropic's verticals ship with. |
+| [`ololand-dd`](./plugins/ololand-dd) | v1.6.1 | Institutional due diligence: deterministic financial engines, 246-category risk taxonomy, cross-document reconciliation, war-game RL strategy simulation, and a flywheel that retrains from analyst corrections. |
+| [`ololand-forensic-qoe`](./plugins/ololand-forensic-qoe) | v0.2.0 | Forensic Quality-of-Earnings primitives as a standalone wedge SKU: Beneish, Benford, EBITDA bridge, journal-entry testing, lapping detection, working-capital deep dive. The Pre-LOI Forensic Screen — $7,500 / 72 hours, IC-defensible, vs Big-4 QoE at $150-500K / 4-8 weeks. |
+| [`ololand-compliance-hooks`](./plugins/ololand-compliance-hooks) | v0.2.0 | Drop-in compliance, citation, and provenance hooks for Anthropic's Claude Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer, audit-log writeback. Populates the empty `hooks/` scaffold Anthropic's verticals ship with. |
 
 The plugins compose additively with each other and with Anthropic's first-party finance plugins.
+
+---
+
+## Maintainer workflow
+
+This repository generates Claude and Codex plugin artifacts from canonical YAML
+metadata. Edit `marketplace.yaml` and `plugins/*/plugin.yaml`, then run:
+
+```bash
+python3 -m pip install -r scripts/requirements.txt
+python3 scripts/generate-plugin-artifacts.py
+./scripts/check-plugin-artifacts.sh
+```
+
+See [docs/plugin-publishing.md](./docs/plugin-publishing.md) for the full
+release process.
 
 ---
 

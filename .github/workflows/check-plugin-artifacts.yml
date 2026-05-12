@@ -1,0 +1,25 @@
+name: Check plugin artifacts
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install generator dependencies
+        run: python3 -m pip install -r scripts/requirements.txt
+
+      - name: Verify generated plugin artifacts
+        run: ./scripts/check-plugin-artifacts.sh

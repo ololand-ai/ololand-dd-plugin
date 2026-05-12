@@ -1,0 +1,52 @@
+name: ololand-forensic-qoe
+version: 0.2.0
+displayName: OloLand Forensic QoE
+category: Productivity
+description: >-
+  Forensic Quality-of-Earnings primitives as a standalone Claude plugin:
+  Beneish M-Score, Benford's Law, EBITDA bridge, journal-entry testing, lapping
+  detection, working-capital deep dive, and covenant-cascade analysis
+  (cross-default chain modeling). Wraps OloLand's deterministic forensic
+  engines as the Pre-LOI Forensic Screen wedge ($7,500 / 72 hours,
+  IC-defensible). Sells against Big-4 QoE ($150-500K, 4-8 weeks).
+marketplaceDescription: >-
+  Forensic Quality-of-Earnings primitives as a standalone plugin: Beneish
+  M-Score, Benford's Law, EBITDA bridge, journal-entry testing, lapping
+  detection, working-capital deep dive, and covenant-cascade analysis
+  (cross-default chain modeling). The Pre-LOI Forensic Screen wedge — $7,500 /
+  72 hours, IC-defensible, vs Big-4 QoE at $150-500K / 4-8 weeks.
+shortDescription: Forensic quality-of-earnings primitives for Pre-LOI screening.
+developerName: OloLand
+homepage: https://ololand.ai/qoe
+repository: https://github.com/ololand-ai/ololand-plugins
+license: Apache-2.0
+keywords:
+  - forensic
+  - qoe
+  - quality-of-earnings
+  - beneish
+  - benford
+  - ebitda-bridge
+  - lapping
+  - journal-entry-testing
+  - covenant-cascade
+  - due-diligence
+  - private-equity
+  - m-and-a
+  - pre-loi
+capabilities:
+  - Read
+  - Write
+  - Interactive
+defaultPrompt:
+  - Run a Pre-LOI forensic screen.
+  - Check Beneish and Benford flags.
+  - Build an EBITDA bridge review.
+targets:
+  claude: true
+  codex: true
+interface:
+  websiteURL: https://ololand.ai/qoe
+  privacyPolicyURL: https://ololand.ai/privacy
+  termsOfServiceURL: https://ololand.ai/terms
+  brandColor: "#B45309"

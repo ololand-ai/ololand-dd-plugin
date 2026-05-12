@@ -1,0 +1,43 @@
+name: Publish release
+
+on:
+  push:
+    tags:
+      - "ololand-*-v*"
+      - "marketplace-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install generator dependencies
+        run: python3 -m pip install -r scripts/requirements.txt
+
+      - name: Verify plugin artifacts
+        run: |
+          ./scripts/check-plugin-artifacts.sh
+          ./scripts/check-version-sync.sh
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release $TAG_NAME already exists"
+            exit 0
+          fi
+
+          gh release create "$TAG_NAME" \
+            --title "$TAG_NAME" \
+            --generate-notes

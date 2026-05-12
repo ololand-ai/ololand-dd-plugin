@@ -1,0 +1,47 @@
+name: ololand-compliance-hooks
+version: 0.2.0
+displayName: OloLand Compliance Hooks
+category: Compliance
+description: >-
+  Drop-in compliance, citation, and provenance hooks for Anthropic's Claude
+  Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation
+  enforcement, audit-log writeback, tier-capacity warning, and evidence-quality
+  warning for OloLand's IC approval gate. Populates the empty hooks/ directory
+  Anthropic's private-equity, financial-analysis, investment-banking,
+  equity-research, and wealth-management vertical plugins ship with.
+marketplaceDescription: >-
+  Drop-in compliance, citation, and provenance hooks for Anthropic's Claude
+  Cowork finance plugins. PreToolUse MNPI guard, PostToolUse citation enforcer,
+  audit-log writeback, tier-capacity warning, and evidence-quality warning for
+  OloLand's IC approval gate. Populates the empty hooks/ scaffold Anthropic's
+  finance verticals ship with.
+shortDescription: Compliance, citation, and provenance hooks for finance workflows.
+developerName: OloLand
+homepage: https://ololand.ai/compare/vs-anthropic-plugins
+repository: https://github.com/ololand-ai/ololand-plugins
+license: Apache-2.0
+keywords:
+  - compliance
+  - hooks
+  - citation
+  - provenance
+  - mnpi
+  - audit
+  - finance
+  - claude-cowork
+  - anthropic-augment
+capabilities:
+  - Read
+  - Interactive
+defaultPrompt:
+  - Configure OloLand compliance hooks.
+  - Explain citation enforcement.
+  - Troubleshoot provenance logging.
+targets:
+  claude: true
+  codex: true
+interface:
+  websiteURL: https://ololand.ai/compare/vs-anthropic-plugins
+  privacyPolicyURL: https://ololand.ai/privacy
+  termsOfServiceURL: https://ololand.ai/terms
+  brandColor: "#7C3AED"
