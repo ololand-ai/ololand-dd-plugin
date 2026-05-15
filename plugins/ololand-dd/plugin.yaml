@@ -1,5 +1,5 @@
 name: ololand-dd
-version: 1.7.1
+version: 1.7.2
 displayName: OloLand DD
 category: Productivity
 description: >-
@@ -11,7 +11,7 @@ description: >-
   competitive simulation, middle-office assumption controls that gate IC
   approval, and a flywheel that retrains from analyst corrections. Three
   sub-agents: dd-analyst, forensic-screener (Pre-LOI 7-primitive forensic
-  battery), war-game-strategist (16-quarter competitive simulation). Eighteen
+  battery), war-game-strategist (16-quarter competitive simulation). Nineteen
   commands including /pre-screen (stage-1 pre-NDA public-target screen with web
   search explicitly off), /ic-memo-skeptical (stage-2 defensive memo with
   citation audit), /assumption-controls, /ic-approve-readiness,
