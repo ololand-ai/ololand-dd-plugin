@@ -1,0 +1,37 @@
+---
+description: "Check per-side data readiness (target / acquirer / combined) for a merger-analysis deal. Zero-credit read."
+---
+
+# /dd-merger-readiness
+
+Report data-readiness tier for each side of a third-party merger-analysis deal so the user knows which engines are safely callable.
+
+## Required input
+
+- **deal_id** — the merger-analysis deal ID (starts with `merger_`). Ask if missing.
+
+## Action
+
+1. Call `get_merger_readiness(deal_id=...)`. The tool returns a dict keyed by side with this shape per side:
+
+   ```
+   {
+     "side": "target" | "acquirer" | "combined",
+     "tier": "high" | "medium" | "low" | "missing",
+     "has_filings": bool,
+     "has_audited_financials": bool,
+     "has_market_research": bool,
+     "document_count": int,
+     "source_quality_score": float
+   }
+   ```
+
+2. Render a compact 3-row summary (target / acquirer / combined) with tier label and document_count.
+
+3. If any side is `low` or `missing`, list the missing artifacts (10-K / 10-Q / 8-K / audited financials / market research) and tell the user where they typically come from. Suggest uploads via `upload_deal_document(deal_id=..., deal_side="target"|"acquirer"|"combined")`.
+
+4. If all three sides are `medium` or higher, point the user at the four merger engines that are safe to run: `/dd-merger-rerun-math`.
+
+## Subscription
+
+Zero-credit read — works on any tier including Plugin Free for read-only inspection. Heavy engines (premium / accretion / DCF / HHI) require Pro+.
