@@ -1,5 +1,5 @@
 name: ololand-dd
-version: 1.7.2
+version: 1.11.0
 displayName: OloLand DD
 category: Productivity
 description: >-
@@ -9,12 +9,17 @@ description: >-
   journal-entry testing, lapping detection), cross-document reconciliation with
   source hierarchy (CPA > tax > management > AI), MaskablePPO war-game
   competitive simulation, middle-office assumption controls that gate IC
-  approval, and a flywheel that retrains from analyst corrections. Three
-  sub-agents: dd-analyst, forensic-screener (Pre-LOI 7-primitive forensic
-  battery), war-game-strategist (16-quarter competitive simulation). Nineteen
-  commands including /pre-screen (stage-1 pre-NDA public-target screen with web
-  search explicitly off), /ic-memo-skeptical (stage-2 defensive memo with
-  citation audit), /assumption-controls, /ic-approve-readiness,
+  approval, observability M1+M2 audit trail (agent_runs, agent_spans,
+  regulator-grade replay, compliance-framework exports), OloNet
+  competitive-intel feed (gateway-ingested AI financial-services moves), and a
+  flywheel that retrains from analyst corrections. Three sub-agents:
+  dd-analyst, forensic-screener (Pre-LOI 7-primitive forensic battery),
+  war-game-strategist (16-quarter competitive simulation). Twenty-seven
+  commands including /verify, /remember and /recall (persistent deal record),
+  /inspect-run, /replay-run, /regulator-export (observability + regulator
+  defense), /plan (pre-execution plan review before the executor fires),
+  /ai-finserv-moves (browse OloNet competitive-intel feed), /pre-screen,
+  /ic-memo-skeptical, /assumption-controls, /ic-approve-readiness,
   /playbook-recall, and /calibrate-vs-history. Counter-positions Anthropic's
   native private-equity plugin.
 shortDescription: Institutional due diligence for M&A and private equity.
