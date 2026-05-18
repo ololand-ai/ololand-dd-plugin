@@ -1,0 +1,56 @@
+---
+description: "Persist a confirmed fact about an OloLand deal across sessions. Writes into deal_session_memory so the next time you (or another analyst) open this deal, the fact is recalled automatically — confirmed EBITDA, sponsor name, IC date, working-capital convention, etc."
+---
+
+# /remember
+
+You are persisting a confirmed (key, value) fact about an OloLand deal into `deal_session_memory`. This is the externalized-working-memory primitive — facts written here survive across conversation sessions about the same deal.
+
+## Required inputs
+
+Ask the user for these if any are missing:
+
+1. **deal_id** — the OloLand deal this fact belongs to.
+2. **key** — a short, stable kebab-case identifier (≤ 200 chars). Examples:
+   - `ebitda_fy24_confirmed`
+   - `sponsor_name`
+   - `ic_date`
+   - `wc_normalization_convention`
+   - `dd_milestone_status`
+3. **value** — the fact itself. Any JSON value: a number, string, list, or small object.
+
+Optional:
+- **note** — short provenance note (≤ 1000 chars). Where the fact came from, what confirmed it, who confirmed it. Strongly recommended for audit trail.
+
+## Action
+
+Call `mcp__ololand__remember_deal_fact` with the collected fields. The tool is idempotent on `key` — re-remembering the same key replaces the value and updates the note.
+
+After success, confirm to the user with the returned status (`created` or `updated`) and quote back the key and value. If the user supplied a note, quote that too so they see the audit trail being written.
+
+## When to use
+
+- A user confirms a number that the AI extracted ("yes, $34.2M FY24 EBITDA is right").
+- A partner gives a fact in a meeting that should persist ("Jim from MidOcean is leading").
+- A modeling convention is agreed ("we're normalizing WC against the 3-year average, not the trailing 12").
+- A milestone advances ("LOI signed 2026-05-20").
+- A deal-specific assumption is locked ("4.0% terminal growth — discussed with sponsor").
+
+## When NOT to use
+
+- For working-state of an in-progress task (use TodoWrite-style state inside the conversation instead).
+- For risks, materialized risks, or claim corrections — those have dedicated capture surfaces (`record_materialized_risks`, `submit_risk_correction`, `submit_agent_claim_correction`).
+- For deal outcomes — use `record_deal_outcome`.
+- For information that is derivable from the deal corpus by running a tool — recompute don't memorize. Reserve `/remember` for analyst confirmations the corpus can't yield.
+
+## Naming discipline
+
+Keys are durable. Pick names a future analyst would search for:
+
+| Good | Bad |
+|---|---|
+| `ebitda_fy24_confirmed` | `ebitda` (ambiguous), `confirmed_ebitda_oct_2025` (date-stamped) |
+| `sponsor_lead_partner` | `partner_name`, `lead`, `who_runs_this` |
+| `wc_normalization_convention` | `notes`, `wc_thing` |
+
+Companion skill: `cmd-remember` (auto-loads). Companion command: `/recall`.

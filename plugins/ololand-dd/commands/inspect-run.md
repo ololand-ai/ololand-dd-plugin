@@ -1,0 +1,78 @@
+---
+description: "Inspect an OloLand agent run end-to-end — the run header (model, tokens, cost, status), the full span tree (every tool call, model call, compaction event), and the grader verdict if any. The observability M2a surface for reviewers, auditors, and the admin UI."
+---
+
+# /inspect-run
+
+You are reading the audit trail for a single OloLand agent run. Everything an analyst, compliance reviewer, or auditor needs to reconstruct *what happened* and *why* lives in `agent_runs` + `agent_spans`. This command surfaces both.
+
+## Required inputs
+
+1. **run_id** — the agent_runs row id. If the user doesn't have one, offer to list recent runs:
+   - "I don't have a run_id. Want me to list recent runs for your company first?" → call `mcp__ololand__list_agent_runs` (optionally filtered by `deal_id`, `status_filter`, `model_version`, `entry_point`).
+
+Optional:
+- **kind** — filter spans by kind (`model_call`, `tool_call`, `compaction`, `sse_event`). Useful when a run has hundreds of spans and the user wants to focus.
+- **show_grader** — default `true`. Include the grader verdict in the output.
+
+## Action
+
+1. Call `mcp__ololand__get_agent_run` with `run_id` for the run header + per-kind span counts + grader fields.
+2. If the user wants the per-span detail (default: yes for runs with <50 spans, ask for runs with more), call `mcp__ololand__list_agent_spans` with `run_id` and optional `kind`.
+3. If `show_grader` and the run has a `grader_passed` value, also surface the rationale verbatim from `mcp__ololand__get_grader_verdict` (or directly from the `grader_rationale` field already in `get_agent_run`'s payload).
+
+## Output
+
+Render in this order:
+
+```
+Run <run_id>
+  Agent:        <agent_name>
+  Status:       <status>
+  Entry point:  <entry_point>
+  Model:        <model_provider> / <model_version>
+  Harness:      <harness_version>
+  Deal:         <deal_id>
+  Started:      <started_at>
+  Ended:        <ended_at>
+
+Tokens
+  Input:           <total_input_tokens>
+  Output:          <total_output_tokens>
+  Cache creation:  <total_cache_creation_tokens>
+  Cache read:      <total_cache_read_tokens>
+  Cost (cents):    <cost_cents>
+
+Spans (<total>)
+  <kind>:  <count>
+  ...
+
+Grader verdict (if any)
+  Passed:       <grader_passed>
+  Rationale:    <grader_rationale>
+  Artifact run: <grader_artifact_run_id>
+```
+
+If the user asked for the span list, append:
+
+```
+Span timeline (oldest first)
+  [<started_at>] <kind> <tool_name?> <model_version?> <latency_ms>ms <is_error?>
+  ...
+```
+
+For long lists, paginate with `limit` / `offset` rather than dumping every span.
+
+## When to use
+
+- Auditing a specific run flagged in production.
+- Reviewing what a replay produced vs the parent run.
+- Tracing why an IC memo cited a number the user disagrees with — start with the run that generated it, walk the spans, find the underlying tool call.
+- Validating that observability + cost-accounting is being recorded correctly.
+
+## When NOT to use
+
+- For aggregate company-level usage — use `mcp__ololand__list_agent_runs` directly without inspecting individual runs.
+- For live progress during an in-flight run — the SSE stream (`/api/sse/conversation/{session_id}`) is the live channel; `agent_runs` is the post-hoc audit log.
+
+Companion commands: `/replay-run`, `/regulator-export`.
